@@ -1,0 +1,13 @@
+<% if(message.length > 0 ) { %>
+<small>Please, attend to these errors </small>
+<ul>
+  <% message.forEach(msg => {  %>
+  <li> <%= msg  %></li>
+
+  <%}) %>
+</ul>
+<%}%>
+<a href="/auth/signup">signup here</a>
+<br />
+<br />
+<a href="/auth/login">Login here</a>

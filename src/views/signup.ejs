@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Signup UI</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .wrapper {
+      width: 40%;
+      margin: auto;
+
+    }
+
+    /* Login form */
+    #signup-form {
+      width: 100%;
+      border-radius: 15px;
+      border: 1px solid #3335FE;
+      padding: 15px 20px;
+    }
+
+    #signup-form label {
+      display: block;
+      margin: 15px auto;
+    }
+
+    #signup-form label input {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1.2em;
+      font-weight: normal;
+      outline: 0px;
+      border: 0px;
+      color: #fff;
+      background-color: #555;
+    }
+
+    #signup-form label input:focus {
+      background-color: #eee;
+      color: #555;
+    }
+
+    #signup-form button {
+      padding: 10px 15px;
+      font-weight: 200;
+      font-size: 1.1em;
+      width: 6em;
+      text-align: center;
+      margin: 10px 0px 10px 0px;
+      color: #fff;
+      background-color: #4CAF50;
+    }
+
+    p#signup-meta {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    p#signup-meta a {
+      border-right: 1px solid #444;
+      padding: 5px 20px;
+      text-decoration: none;
+      color: #555;
+      border: 0;
+    }
+
+    @media (max-width: 560px) {
+      .wrapper {
+        width: 100%;
+      }
+
+      /* Signup form */
+      p#signup-meta a {
+        padding: 5px;
+      }
+
+    }
+
+    @media (min-width: 561px) {
+      .wrapper {
+        width: 60%;
+      }
+
+
+
+      /* Signup form */
+      p#signup-meta a {
+        padding: 5px;
+      }
+
+    }
+
+    @media (min-width: 768px) {
+      .wrapper {
+        width: 40%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <form name="signup" method="POST" action="/auth/signup" id="signup-form">
+      <% if(message.length > 0 ) { %>
+      <small>Please, attend to these errors </small>
+      <ul>
+        <% message.forEach(msg => {  %>
+        <li> <%= msg  %></li>
+
+        <%}) %>
+      </ul>
+      <%}%>
+      <label for="firstname">
+        <input class="form-control" name="firstname" type="text" placeholder="Firstname" />
+      </label>
+
+      <label for="lastname">
+        <input class="form-control" name="lastname" type="text" placeholder="Lastname" />
+      </label>
+
+      <label for="email">
+        <input class="form-control" name="email" type="text" placeholder="Email" />
+      </label>
+
+      <label for="password">
+        <input class="form-control" name="password" type="password" placeholder="Password" />
+      </label>
+
+      <button type="submit" class="btn">Sign up</button>
+      <p id="signup-meta"> Existing User : <a href="/auth/login">Login</a></p>
+    </form>
+  </div>
+
+
+</body>
+
+</html>

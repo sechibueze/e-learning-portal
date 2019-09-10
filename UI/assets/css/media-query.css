@@ -1,0 +1,24 @@
+/* xs - extra-small */
+@media screen and (max-width: 320px){
+  body{
+    background: #ddd;
+  }
+}
+/* sm - small */
+@media screen and (min-width: 320px) and (max-width: 480px){
+  body{
+    background: #ccc;
+  }
+}
+/* md - medium */
+@media screen and (min-width: 480px) and (max-width: 760px){
+body{
+  background: #eee;
+}
+}
+/* lg - large */
+@media screen and (min-width: 760px){
+  body{
+    background: #cde;
+  }
+}

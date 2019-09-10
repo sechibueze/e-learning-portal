@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>LIB | Signup & Login UI</title>
+  <meta name="description" content="E-learning portal for Schoolinka">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./assets/css/style.css" type="text/css" />
+  <style>
+    form[name='signup-form'],
+    form[name='login-form'] {
+      width: 40%;
+      margin: 20px auto;
+      /* center horizontally */
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 15px;
+      border: 1px solid #234;
+      box-shadow: 1px 1px 5px #eee;
+    }
+
+    form[name='signup-form'] input,
+    form[name='login-form'] input {
+      display: block;
+      width: 100%;
+      margin: 10px auto;
+      padding: 8px 5px;
+      font-size: 1.2em;
+      font-weight: normal;
+      text-align: left;
+      outline: 0;
+      border: 0;
+      color: #444;
+    }
+
+    form[name='signup-form'] input:focus,
+    form[name='login-form'] input:focus {
+      border-bottom: 1px solid #212;
+    }
+
+    button[name="signup-btn"],
+    button[name="login-btn"] {
+      text-align: center;
+      font-size: 1.1em;
+      padding: 10px 15px;
+      color: #f9f9f9;
+      background-color: #751717e3;
+      transition: 1s background;
+      display: block;
+      margin: 5px auto;
+
+    }
+
+    button[name="signup-btn"]:hover,
+    button[name="login-btn"]:hover {
+      color: #751717e3;
+      background-color: #f3f3f3;
+      border: 1px solid #751717e3;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="/signup" method="POST" name="signup-form">
+    <input name="firstname" required type="text" placeholder="Firstname" />
+    <input name="lastname" required type="text" placeholder="Lastname" />
+    <input name="email" required type="email" placeholder="Email" />
+    <input name="password" required type="password" placeholder="Password" />
+    <button type="submit" name="signup-btn">Signup</button>
+  </form>
+
+  <form action="/login" method="POST" name="login-form">
+
+    <input name="email" required type="email" placeholder="Email" />
+    <input name="password" required type="password" placeholder="Password" />
+    <button type="submit" name="login-btn">Login</button>
+  </form>
+</body>
+
+</html>
