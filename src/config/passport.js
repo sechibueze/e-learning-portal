@@ -1,4 +1,5 @@
 import { Strategy as LocalStrategy } from 'passport-local';
+import bcrypt from 'bcrypt';
 import debug from 'debug';
 const logger = debug('passportConfig');
 import User from '../model/users';
@@ -67,15 +68,37 @@ const config = (passport) => {
     passwordField: 'password',
     passReqToCallback: true
   }, (req, email, password, done) => {
+    
 
     User.findOne({ email }, (err, user) => {
+      console.log('founc:', err, user);
       if (err) {
-
-        return done(null, false, req.flash('message', 'Record not found'))
+        return done(err);
       }
-      return done(null, user, req.flash('message', 'User login successful'));
+
+      if (user) {
+        // Check if password match
+        console.log('found user: ', err, user);
+
+        bcrypt.compare(password, user.password, (err, same) => {
+          if (err) return done(err);
+
+          if (same) {
+            return done(null, user, req.flash('message', 'Successfully logged in'))
+          } else {
+            return done(null, false, req.flash('message', 'Email/Password invalid'));
+          }
+        });
+
+      }
+
+      if (!user) {
+        //No error but User not found: user === null
+        return done(null, false, req.flash('message', 'Record not Found, please Sign Up'));
+      }
+
+
     });
-    // const user = { email, password, user: 'attached' };
 
   }));
 };

@@ -1,4 +1,5 @@
 import express from 'express';
+
 import passport from 'passport';
 import { check } from 'express-validator';
 import Validation from '../middlewares/validation';
@@ -15,16 +16,28 @@ router.get('/users', (req, res) => {
   })
 });
 router.get('/signup', (req, res) => {
-  res.render('signup', { message: req.flash('message') });
+  return res.render('signup', { status: 'error', message: req.flash('message') });
 });
+
+router.get('/login', (req, res) => {
+  return res.render('login', { message: req.flash('message') });
+});
+
 
 router.get('/profile', (req, res) => {
 
   if (req.user) {
     //user is logged in
-    res.render('profile', { message: `Welcome ${req.user.firstname}` });
+    let data = req.user;
+    delete data['password'];
+    console.log('sending data : ', data);
+    return res.render('profile', {
+      message: `${req.flash('message')} Welcome ${req.user.firstname}`,
+      data
+    },
+    );
   } else {
-    res.redirect('/');
+    return res.redirect('/');
   }
 
 });
@@ -45,15 +58,9 @@ router.post('/signup', [
 router.post('/login', [
   check('email').isEmail().withMessage('Email is required'),
   check('password').isString().isLength({ min: 5 }).withMessage('Password is required')
-], Validation.handleErrors,
-  passport.authenticate('local-login', { failureFlash: true }),
-  (req, res, next) => {
-    // console.log('req', req.login);
-    return res.status(401).json({
-      message: req.flash('message'),
-      data: req.user
-    });
-  });
+], Validation.handleLoginErrors,
+  passport.authenticate('local-login', { successRedirect: '/auth/profile', failureRedirect: '/auth/login', failureFlash: true })
+);
 
 
 

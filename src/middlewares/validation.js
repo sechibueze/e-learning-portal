@@ -19,22 +19,20 @@ export default class Validation {
     next(); //pass control to passport
   }
 
-  static handleErrors(req, res, next) {
+  static handleLoginErrors(req, res, next) {
 
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      // console.log('errors : ', errors);
-      // req.flash('message', )
-      return res.status(500).json({
+      //re=render login page with error messages
+      return res.render('login', {
         status: 'error',
-        errors: errors.errors.map(err => err.msg)
+        message: errors.errors.map(err => err.msg)
       });
     }
 
     // if control gets here => no errors
     next(); //pass control to passport
   }
-
 
 }
