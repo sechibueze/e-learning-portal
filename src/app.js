@@ -19,7 +19,7 @@ mongoose.connect(dbConfig(), { useNewUrlParser: true }, (err) => {
   logger('Connected to mongoDB...');
 });
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // Import 
 import userController from './controllers/userController';
